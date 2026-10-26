@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Open Account - Kashi Bank</title>
+</head>
+<body>
+    <h1>Open a New Account</h1>
+
+    {% with messages = get_flashed_messages() %}
+        {% for m in messages %}
+            <p><b>{{ m }}</b></p>
+        {% endfor %}
+    {% endwith %}
+
+    <form method="POST" action="/open-account">
+        <label>First Name:</label><br>
+        <input type="text" name="first_name" required><br><br>
+
+        <label>Last Name:</label><br>
+        <input type="text" name="last_name"><br><br>
+
+        <label>Date of Birth:</label><br>
+        <input type="date" name="dob" required><br><br>
+
+        <label>Gender:</label><br>
+        <select name="gender">
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select><br><br>
+
+        <label>Mobile:</label><br>
+        <input type="text" name="mobile" required><br><br>
+
+        <label>Email:</label><br>
+        <input type="email" name="email"><br><br>
+
+        <label>Address:</label><br>
+        <input type="text" name="address"><br><br>
+
+        <label>City:</label><br>
+        <input type="text" name="city"><br><br>
+
+        <label>Branch:</label><br>
+        <select name="branch_id">
+            {% for b in branches %}
+                <option value="{{ b[0] }}">{{ b[1] }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label>Account Type:</label><br>
+        <select name="account_type">
+            <option>Saving</option>
+            <option>Current</option>
+            <option>Salary</option>
+        </select><br><br>
+
+        <label>Initial Deposit:</label><br>
+        <input type="number" name="initial_deposit" min="0" step="0.01" value="0" required><br><br>
+
+        <button type="submit">Open Account</button>
+    </form>
+
+    <br><a href="/">Back to Home</a>
+</body>
+</html>

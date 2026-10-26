@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transaction History - Kashi Bank</title>
+</head>
+<body>
+    <h1>Transaction History</h1>
+
+    {% with messages = get_flashed_messages() %}
+        {% for m in messages %}
+            <p><b>{{ m }}</b></p>
+        {% endfor %}
+    {% endwith %}
+
+    <form method="POST" action="/history">
+        <label>Account Number:</label><br>
+        <input type="text" name="account" value="{{ account }}" required><br><br>
+        <button type="submit">View History</button>
+    </form>
+
+    {% if rows %}
+    <br>
+    <table border="1" cellpadding="6">
+        <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Reference</th>
+        </tr>
+        {% for r in rows %}
+        <tr>
+            <td>{{ r[0] }}</td>
+            <td>{{ r[1] }}</td>
+            <td>{{ r[2] }}</td>
+            <td>{{ r[3] }}</td>
+            <td>{{ r[4] }}</td>
+            <td>{{ r[5] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    <br><a href="/">Back to Home</a>
+</body>
+</html>
